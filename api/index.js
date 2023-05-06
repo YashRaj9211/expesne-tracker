@@ -28,6 +28,7 @@ app.post('/expenses', (req, res) => {
         dateTime: req.body.dateTime,
         amount: req.body.amount
     });
+
     expense.save()
         .then(result => {
             res.json({ body: result });
@@ -36,6 +37,8 @@ app.post('/expenses', (req, res) => {
             console.log(error);
             res.status(500).json({ error: error });
         });
+
+
 });
 
 app.get('/expenses', (req, res) => {
