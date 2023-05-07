@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // add this line
+const cors = require('cors');
 const mongoose = require('mongoose');
+
+const { Expense } = require('./models/expenseSchema.js');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -10,16 +12,9 @@ app.use(cors());
 
 const PORT = 4000;
 
+
 mongoose.connect('mongodb://127.0.0.1:27017/myapp', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const ExpenseSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    dateTime: Date,
-    amount: Number
-});
-
-const Expense = mongoose.model('Expense', ExpenseSchema);
 
 app.post('/expenses', (req, res) => {
     const expense = new Expense({
@@ -37,8 +32,6 @@ app.post('/expenses', (req, res) => {
             console.log(error);
             res.status(500).json({ error: error });
         });
-
-
 });
 
 app.get('/expenses', (req, res) => {
