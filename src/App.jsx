@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import dotenv from 'dotenv';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+
 import TransactionList from './components/Transaction';
 import NewTransaction from './components/NewTransaction';
 
@@ -23,6 +25,7 @@ function App() {
     <>
       <div className='main'>
         <h1>$400<span>.00</span></h1>
+        
 
         <NewTransaction
         onTransactionAdded={handleTransactionAdded}

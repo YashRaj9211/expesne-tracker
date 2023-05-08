@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const expenseSchema = new mongoose.Schema({
-    // user: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true
-    // },
     name: {
         type: String,
         required: true
@@ -13,7 +8,7 @@ const expenseSchema = new mongoose.Schema({
     description: String,
     dateTime: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
     amount: {
         type: Number,
@@ -21,6 +16,7 @@ const expenseSchema = new mongoose.Schema({
     }
 });
 
+
 const Expense = mongoose.model('Expense', expenseSchema);
 
-module.exports = {Expense}
+module.exports = { Expense }

@@ -15,36 +15,8 @@ const PORT = 4000;
 
 mongoose.connect('mongodb://127.0.0.1:27017/myapp', { useNewUrlParser: true, useUnifiedTopology: true });
 
-
-app.post('/expenses', (req, res) => {
-    const expense = new Expense({
-        name: req.body.name,
-        description: req.body.description,
-        dateTime: req.body.dateTime,
-        amount: req.body.amount
-    });
-
-    expense.save()
-        .then(result => {
-            res.json({ body: result });
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({ error: error });
-        });
-});
-
-app.get('/expenses', (req, res) => {
-    Expense.find()
-        .then(expenses => {
-            res.json(expenses);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: err });
-        });
-});
-
+const expenseRouter = require('./routes/expenseRoute.js'); 
+app.use('/expenses', expenseRouter);
 
 app.listen(PORT, function (err) {
     if (err) console.log("Error in server setup")
